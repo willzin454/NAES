@@ -1,0 +1,46 @@
+{% extends "website/modelo.html" %}
+
+{% block title %}Sobre{% endblock %}
+
+{% block conteudo %}
+
+{% load static %}
+
+<div class="container">
+
+    <h1 class="mb-4">📘 Sobre o Sistema</h1>
+
+    <p>
+        Este sistema foi desenvolvido com o objetivo de gerenciar cursos, alunos,
+        professores e matrículas de forma organizada e eficiente.
+    </p>
+
+    <p>
+        O sistema permite cadastrar cursos, associar disciplinas, criar turmas,
+        vincular professores e realizar matrículas de alunos.
+    </p>
+
+    <p>
+        Ele foi desenvolvido utilizando Django e Bootstrap, seguindo boas práticas
+        de desenvolvimento web.
+    </p>
+
+    <hr class="my-5">
+
+    <h2>📊 Diagrama de Classes</h2>
+
+    <p>Representação das entidades do sistema:</p>
+
+    <img src="{% static 'img/diagrama_classes.png' %}" class="img-fluid shadow rounded mb-5">
+
+    <hr class="my-5">
+
+    <h2>👥 Diagrama de Caso de Uso</h2>
+
+    <p>Interações do usuário com o sistema:</p>
+
+    <img src="{% static 'img/diagrama_caso_uso.png' %}" class="img-fluid shadow rounded">
+
+</div>
+
+{% endblock %}

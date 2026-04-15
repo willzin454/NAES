@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>{% block title %}Sistema de Cursos{% endblock %}</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Fonte -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- CSS EMBUTIDO -->
+    <style>
+        :root {
+            --bs-primary: #084d6e;
+            --bs-success: #2a9d8f;
+            --bs-info: #48cae4;
+            --bs-warning: #e9c46a;
+            --bs-danger: #e76f51;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255,255,255,0.9) !important;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: #444;
+        }
+
+        .nav-link:hover {
+            color: var(--bs-primary);
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, #084d6e, #0a6c8f);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        /* CARDS */
+        .card {
+            border-radius: 12px;
+            border: none;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: 50px;
+        }
+    </style>
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold text-primary" href="/">🎓 Cursos</a>
+        
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMain">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'lista_cursos' %}">Cursos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Alunos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Matrículas</a></li>
+                <a class="nav-link" href="{% url 'sobre' %}">Sobre</a>
+            </ul>
+
+            <div class="d-flex">
+                <a href="#" class="btn btn-outline-primary rounded-pill px-4">
+                    Conta
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+{% block hero %}{% endblock %}
+
+<!-- CONTEÚDO -->
+<main class="container py-5 mt-5">
+    {% block conteudo %}{% endblock %}
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-white border-top py-4 text-center">
+    <span class="text-muted">© 2026 Sistema de Cursos</span>
+</footer>
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+{% block extra_js %}{% endblock %}
+
+</body>
+</html>
