@@ -1,0 +1,39 @@
+{% extends 'website/modelo.html' %}
+
+{% block title %}
+  Cursos
+{% endblock %}
+
+{% block conteudo %}
+  <div class="d-flex justify-content-between mb-4">
+    <h2>📘 Cursos</h2>
+    <a href="{% url 'criar_curso' %}" class="btn btn-primary">Novo Curso</a>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for curso in cursos %}
+        <tr>
+          <td>{{ curso.nome }}</td>
+          <td>{{ curso.descricao }}</td>
+          <td>
+            <a href="{% url 'editar_curso' curso.id %}" class="btn btn-warning btn-sm">Editar</a>
+            <a href="{% url 'excluir_curso' curso.id %}" class="btn btn-danger btn-sm">Excluir</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="3">Nenhum curso cadastrado</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
