@@ -5,35 +5,47 @@
 {% endblock %}
 
 {% block conteudo %}
-  <div class="d-flex justify-content-between mb-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
     <h2>📘 Cursos</h2>
-    <a href="{% url 'criar_curso' %}" class="btn btn-primary">Novo Curso</a>
+
+    <a href="{% url 'criar_curso' %}" class="btn btn-primary rounded-pill px-4">Novo Curso</a>
   </div>
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>Descrição</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
+  <div class="card shadow-sm border-0">
+    <div class="card-body">
+      <table class="table table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th width="280">Ações</th>
+          </tr>
+        </thead>
 
-    <tbody>
-      {% for curso in cursos %}
-        <tr>
-          <td>{{ curso.nome }}</td>
-          <td>{{ curso.descricao }}</td>
-          <td>
-            <a href="{% url 'editar_curso' curso.id %}" class="btn btn-warning btn-sm">Editar</a>
-            <a href="{% url 'excluir_curso' curso.id %}" class="btn btn-danger btn-sm">Excluir</a>
-          </td>
-        </tr>
-      {% empty %}
-        <tr>
-          <td colspan="3">Nenhum curso cadastrado</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+        <tbody>
+          {% for curso in cursos %}
+            <tr>
+              <td>
+                <strong>{{ curso.nome }}</strong>
+              </td>
+
+              <td>{{ curso.descricao }}</td>
+
+              <td>
+                <a href="{% url 'detalhar_curso' curso.id %}" class="btn btn-info btn-sm">Detalhes</a>
+
+                <a href="{% url 'editar_curso' curso.id %}" class="btn btn-warning btn-sm">Editar</a>
+
+                <a href="{% url 'excluir_curso' curso.id %}" class="btn btn-danger btn-sm">Excluir</a>
+              </td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="3" class="text-center text-muted py-4">Nenhum curso cadastrado</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 {% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'website/modelo.html' %}
+
+{% block title %}
+  Detalhes do Curso
+{% endblock %}
+
+{% block conteudo %}
+  <h1 class="mb-4">{{ curso.nome }}</h1>
+
+  <div class="card p-4 shadow-sm">
+    <p>
+      <strong>Descrição:</strong><br />
+      {{ curso.descricao }}
+    </p>
+  </div>
+
+  <div class="mt-4">
+    <a href="{% url 'editar_curso' curso.id %}" class="btn btn-warning">Editar</a>
+
+    <a href="{% url 'excluir_curso' curso.id %}" class="btn btn-danger">Excluir</a>
+
+    <a href="{% url 'lista_cursos' %}" class="btn btn-secondary">Voltar</a>
+  </div>
+{% endblock %}

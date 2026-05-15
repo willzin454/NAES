@@ -5,28 +5,41 @@
 {% endblock %}
 
 {% block conteudo %}
-  <h2 class="mb-4">
-    {% if curso %}
-      Editar
-    {% else %}
-      Novo
-    {% endif %}Curso
-  </h2>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+          <h2 class="mb-4">
+            {% if curso %}
+              ✏️ Editar Curso
+            {% else %}
+              ➕ Novo Curso
+            {% endif %}
+          </h2>
 
-  <form method="POST">
-    {% csrf_token %}
+          <form method="POST">
+            {% csrf_token %}
 
-    <div class="mb-3">
-      <label>Nome</label>
-      <input type="text" name="nome" class="form-control" value="{{ curso.nome|default:'' }}" />
+            <div class="mb-3">
+              <label class="form-label">Nome</label>
+
+              <input type="text" name="nome" class="form-control" value="{{ curso.nome|default:'' }}" required />
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label">Descrição</label>
+
+              <textarea name="descricao" class="form-control" rows="4" required>{{ curso.descricao|default:'' }}</textarea>
+            </div>
+
+            <div class="d-flex gap-2">
+              <button class="btn btn-success">Salvar</button>
+
+              <a href="{% url 'lista_cursos' %}" class="btn btn-secondary">Voltar</a>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-
-    <div class="mb-3">
-      <label>Descrição</label>
-      <textarea name="descricao" class="form-control">{{ curso.descricao|default:'' }}</textarea>
-    </div>
-
-    <button class="btn btn-success">Salvar</button>
-    <a href="{% url 'lista_cursos' %}" class="btn btn-secondary">Voltar</a>
-  </form>
+  </div>
 {% endblock %}
