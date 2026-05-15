@@ -1,45 +1,31 @@
 {% extends 'website/modelo.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block title %}
   Curso
 {% endblock %}
 
 {% block conteudo %}
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card shadow-sm border-0">
-        <div class="card-body p-4">
-          <h2 class="mb-4">
-            {% if curso %}
-              ✏️ Editar Curso
-            {% else %}
-              ➕ Novo Curso
-            {% endif %}
-          </h2>
+  <div class="container">
+    <div class="card shadow p-4">
+      <h2 class="mb-4">
+        {% if form.instance.pk %}
+          Editar Curso
+        {% else %}
+          Novo Curso
+        {% endif %}
+      </h2>
 
-          <form method="POST">
-            {% csrf_token %}
+      <form method="POST">
+        {% csrf_token %}
 
-            <div class="mb-3">
-              <label class="form-label">Nome</label>
+        {{ form|crispy }}
 
-              <input type="text" name="nome" class="form-control" value="{{ curso.nome|default:'' }}" required />
-            </div>
+        <button class="btn btn-success">Salvar</button>
 
-            <div class="mb-4">
-              <label class="form-label">Descrição</label>
-
-              <textarea name="descricao" class="form-control" rows="4" required>{{ curso.descricao|default:'' }}</textarea>
-            </div>
-
-            <div class="d-flex gap-2">
-              <button class="btn btn-success">Salvar</button>
-
-              <a href="{% url 'lista_cursos' %}" class="btn btn-secondary">Voltar</a>
-            </div>
-          </form>
-        </div>
-      </div>
+        <a href="{% url 'lista_cursos' %}" class="btn btn-secondary">Voltar</a>
+      </form>
     </div>
   </div>
 {% endblock %}

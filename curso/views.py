@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Curso
+from .forms import CursoForm
 
 
 # LISTAR
@@ -11,34 +12,34 @@ def lista_cursos(request):
 
 # CRIAR
 def criar_curso(request):
-
     if request.method == "POST":
+        form = CursoForm(request.POST)
 
-        nome = request.POST.get("nome")
-        descricao = request.POST.get("descricao")
+        if form.is_valid():
+            form.save()
+            return redirect("lista_cursos")
 
-        Curso.objects.create(nome=nome, descricao=descricao)
+    else:
+        form = CursoForm()
 
-        return redirect("lista_cursos")
-
-    return render(request, "curso/form_curso.html")
+    return render(request, "curso/form_curso.html", {"form": form})
 
 
 # EDITAR
 def editar_curso(request, id):
-
     curso = get_object_or_404(Curso, id=id)
 
     if request.method == "POST":
+        form = CursoForm(request.POST, instance=curso)
 
-        curso.nome = request.POST.get("nome")
-        curso.descricao = request.POST.get("descricao")
+        if form.is_valid():
+            form.save()
+            return redirect("lista_cursos")
 
-        curso.save()
+    else:
+        form = CursoForm(instance=curso)
 
-        return redirect("lista_cursos")
-
-    return render(request, "curso/form_curso.html", {"curso": curso})
+    return render(request, "curso/form_curso.html", {"form": form})
 
 
 # EXCLUIR
